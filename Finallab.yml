@@ -1,10 +1,8 @@
----
-- name: Set Ip for Interface
+name: Set IP
   hosts: R1
   gather_facts: no
 
   tasks:
-
     - name: Set Ethernet0/2 IPv4 address
       ios_l3_interface:
         name: Ethernet0/2
@@ -13,6 +11,7 @@
       ios_interface:
         name: Ethernet0/2
         state: present
+    
     - name: Set Ethernet0/1 IPv4 address
       ios_l3_interface:
         name: Ethernet0/1
@@ -22,19 +21,20 @@
         name: Ethernet0/1
         state: present
         
-        
     - name: Show ip
       ios_command:
         commands:
           - show ip int brief
       register: show_ip
-  - debug: var=show_ip.stdout_lines
 
+    - debug: var=show_ip.stdout_lines
+    
+name: Set IP
+  
   hosts: R2
   gather_facts: no
 
   tasks:
-
     - name: Set Ethernet0/2 IPv4 address
       ios_l3_interface:
         name: Ethernet0/2
@@ -43,6 +43,8 @@
       ios_interface:
         name: Ethernet0/2
         state: present
+      
+    
     - name: Set Ethernet0/1 IPv4 address
       ios_l3_interface:
         name: Ethernet0/1
@@ -57,4 +59,5 @@
         commands:
           - show ip int brief
       register: show_ip
+
     - debug: var=show_ip.stdout_lines
