@@ -88,7 +88,7 @@
         next_hop: 192.168.12.1
         
     - name: ping from E0/1 R2 to R1
-      cisco.ios.ios_ping:
+      ios_ping:
         source: Ethernet0/1
         dest: 192.168.12.1
 
